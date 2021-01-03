@@ -1,0 +1,31 @@
+---
+  - name: Filebeat Playbook
+    hosts: webservers
+    become: true
+    tasks: 
+
+    - name: Download Filebeat deb File
+      get_url:
+        url: "https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.8.1-amd64.deb"
+        dest: /home/azadmin/filebeat.deb
+
+    - name: Install Filebeat deb
+      apt:
+        deb: /home/azadmin/filebeat.deb
+
+    - name: Copy Configuration
+      copy:
+        src: /etc/ansible/files/filebeat-config.yml
+        dest: /etc/filebeat/filebeat.yml
+
+    - name: Enable and Configure the System Module
+      command: filebeat modules enable system
+
+    - name: Filebeat Setup
+      command: filebeat setup
+
+    - name: Start Filebeat
+      service: 
+        name: filebeat
+        state: started
+        enabled: yes
