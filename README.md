@@ -2,8 +2,6 @@
 
 The files in this repository were used to configure the network depicted below.
 
-**Note**: The following image link needs to be updated. Replace `diagram_filename.png` with the name of your diagram image file.  
-
 ![Network Topology](Images/Network_Diagram.png)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the file may be used to install only certain pieces of it, such as Filebeat.
@@ -24,15 +22,6 @@ This document contains the following details:
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
 Load balancing ensures that the application will be highly available, in addition to restricting access to the network.
-- A load balancer is used in this topology because it increases the
-    availability from the CIA Triad. In addition to high availability, a load
-    balancer will also restrict access to the internal network that may sit
-    beheind the applications servers. 
-- A jump box is an advantage for administrators becuase it restricts them to
-    use a machine that is only used for administration tasks, so this
-    potentially negates possible breaches on a personal computer. In addition
-    to this, it is easier to audit and keep track of access, since it is the
-    only way to manage the resources in the network. 
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the log files and system metrics.
 
@@ -72,10 +61,10 @@ because it allows a consistent and predictable configuration. In addition to con
 can be created and configured very quickly.  
 
 The playbook implements the following tasks:
-- Configure maximum mapped memory with sysctl module
-- Install docker and python3-pip with aptitude
-- Install docker python package with pip
-- Enable docker systemd service
+- Configure maximum mapped memory with `sysctl` module
+- Install `docker.io` and `python3-pip` packages with `apt` module
+- Install docker `python` package with `pip`
+- Enable systemd docker service
 - Run ELK docker container
 
 
