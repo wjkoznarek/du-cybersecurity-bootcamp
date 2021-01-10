@@ -134,7 +134,8 @@ setup.kibana:
 host: "<vm.ip.addr>:5601"
 ```
 
-  - Then run the playbook `$ ansible-playbook /etc/ansible/roles/filebeat-playbook.yml`
+  - Then run the playbook 
+    - `$ ansible-playbook /etc/ansible/roles/filebeat-playbook.yml`
 
 
 - **Optional:** To configure Metricbeat on your web VMs run the following command
@@ -152,4 +153,5 @@ setup.kibana:
 host: "<vm.ip.addr>:5601"
 ```
 		
-  - Then run the playbook `$ ansible-playbook /etc/ansible/roles/metricbeat-playbook.yml`
+  - Then run the playbook 
+    - `$ ansible-playbook /etc/ansible/roles/metricbeat-playbook.yml`
