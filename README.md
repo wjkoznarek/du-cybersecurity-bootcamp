@@ -6,8 +6,10 @@ The files in this repository were used to configure the network depicted below.
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the file may be used to install only certain pieces of it, such as Filebeat.
 
-  - _TODO: Enter the playbook file._
-
+  - [ELK Stack Playbook](Ansible/ansible/roles/elk-stack-playbook.yml)
+  - [Filebeat Playbook](Ansible/ansible/roles/filebeat-playbook.ym)
+  - [Metricbeat Playbook](Ansible/ansible/roles/metricbeat-playbook.ym)
+  -
 This document contains the following details:
 - Description of the Topologu
 - Access Policies
@@ -68,7 +70,7 @@ The playbook implements the following tasks:
 - Run ELK docker container
 
 
-The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
+The following screenshot displays the result of running `docker ps -a` after successfully configuring the ELK instance.
 
 ![Screenshot](Images/docker_ps_output.png)
 
@@ -83,19 +85,72 @@ We have installed the following Beats on these machines:
 - Metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+- Filebeat parses and forwards system logs from the Web VMs to the ELK Stack in an easy to read format.
+- Metricbeat reports system and service statistics about the ELK stack VM.
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
-- Update the _____ file to include...
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
 
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- _Which URL do you navigate to in order to check that the ELK server is running?
+- Copy the `elk-stack-playbook.yml` playbook file to `/etc/ansible/roles/`
+    directory inside the ansible container.
+    `$ sudo docker cp elk-stack-playbook.yml ansible:/etc/ansible/roles/elk-stack-playbook.yml`
 
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+- **Optional:** Copy the whole directory for the Metricbeat and Filebeat
+        playbooks and configuration files.
+    `$ sudo docker cp Ansible/ansible ansible:/etc/ansible`
+
+- Update the `/etc/ansible/hosts` file to include the ELK stack VM IP address.
+
+    - Example configuration of `/etc/ansible/hosts`
+```yaml
+[elk]
+10.1.0.100  ansible_python_interpreter=/usr/bin/python3
+alpha.example.org  ansible_python_interpreter=/usr/bin/python3
+192.168.1.100  ansible_python_interpreter=/usr/bin/python3
+```
+- Run the playbook, and navigate to `http://[your.VM.IP]:5601/app/kibana.` to check that the installation worked as expected.
+    `$ ansible-playbook /etc/ansible/roles/elk-stack-playbook.yml`
+
+    - Check that the ELK Stack playbook is functioning by accessing kibana from
+        a web browser.
+
+![ELK Webpage Screenshot](Images/elk_webpage_screenshot.png)
+
+- **Optional:** To configure Filebeat on your web VMs run the following
+    commands
+
+  - Edit `/etc/ansible/files/filebeat-config.yml` to include the ELK Stack IP address.
+
+```yml
+output.elasticsearch:
+hosts: ["<vm.ip.addr>:9200"]
+username: "elastic"
+password: "changeme"
+```
+```yml
+setup.kibana:
+host: "<vm.ip.addr>:5601"
+```
+	- Then run the playbook
+  `$ ansible-playbook /etc/ansible/roles/filebeat-playbook.yml`
+
+
+- **Optional:** To configure Metricbeat on your web VMs run the following command
+
+  - Edit `/etc/ansible/files/metricbeat-config.yml` to include the ELK Stack IP address.
+
+```yml
+output.elasticsearch:
+hosts: ["<vm.ip.addr>:9200"]
+username: "elastic"
+password: "changeme"
+```
+```yml
+setup.kibana:
+host: "<vm.ip.addr>:5601"
+```
+		
+  - Then run the playbook
+  `$ ansible-playbook /etc/ansible/roles/metricbeat-playbook.yml`

@@ -25,10 +25,10 @@
 
 [elk]
 10.1.0.4	ansible_python_interpreter=/usr/bin/python3
-## alpha.example.org
-## beta.example.org
-## 192.168.1.100
-## 192.168.1.110
+## alpha.example.org ansible_python_interpreter=/usr/bin/python3
+## beta.example.org ansible_python_interpreter=/usr/bin/python3
+## 192.168.1.100 ansible_python_interpreter=/usr/bin/python3
+## 192.168.1.110 ansible_python_interpreter=/usr/bin/python3
 
 # If you have multiple hosts following a pattern you can specify
 # them like this:
