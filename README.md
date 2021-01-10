@@ -9,7 +9,7 @@ These files have been tested and used to generate a live ELK deployment on Azure
   - [ELK Stack Playbook](Ansible/ansible/roles/elk-stack-playbook.yml)
   - [Filebeat Playbook](Ansible/ansible/roles/filebeat-playbook.ym)
   - [Metricbeat Playbook](Ansible/ansible/roles/metricbeat-playbook.ym)
-  -
+
 This document contains the following details:
 - Description of the Topologu
 - Access Policies
@@ -42,7 +42,7 @@ The configuration details of each machine may be found below.
 The machines on the internal network are not exposed to the public Internet. 
 
 Only the Jump-Box-Provisioner machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- 74.243.14.13
+- <home IP addr>
 
 Machines within the network can only be accessed by Jump-Box-Provisioner.
 
@@ -50,8 +50,8 @@ A summary of the access policies in place can be found in the table below.
 
 | Name                 | Publicly Accessible | Allowed IP Addresses |
 |----------------------|---------------------|----------------------|
-| Jump-Box-Provisioner | Yes                 | 73.243.14.13         |
-| elk-stack            | Yes                 | 73.243.14.13         |
+| Jump-Box-Provisioner | Yes                 | <home IP addr>       |
+| elk-stack            | Yes                 | <home IP addr>       |
 | Web-1                | No                  | 10.0.0.4             |
 | Web-2                | No                  | 10.0.0.4             |
 | Web-3                | No                  | 10.0.0.4             |
@@ -86,7 +86,7 @@ We have installed the following Beats on these machines:
 
 These Beats allow us to collect the following information from each machine:
 - Filebeat parses and forwards system logs from the Web VMs to the ELK Stack in an easy to read format.
-- Metricbeat reports system and service statistics about the ELK stack VM.
+- Metricbeat reports system and service statistics about the Web VMs to the ELK stack VM.
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
@@ -95,28 +95,28 @@ SSH into the control node and follow the steps below:
 
 - Copy the `elk-stack-playbook.yml` playbook file to `/etc/ansible/roles/`
     directory inside the ansible container.
-    `$ sudo docker cp elk-stack-playbook.yml ansible:/etc/ansible/roles/elk-stack-playbook.yml`
+    - `$ sudo docker cp elk-stack-playbook.yml <container.name>:/etc/ansible/roles/elk-stack-playbook.yml`
 
 - **Optional:** Copy the whole directory for the Metricbeat and Filebeat
         playbooks and configuration files.
-    `$ sudo docker cp Ansible/ansible ansible:/etc/ansible`
+    - `$ sudo docker cp Ansible/ansible/* <container.name>:/etc/ansible`
 
 - Update the `/etc/ansible/hosts` file to include the ELK stack VM IP address.
 
     - Example configuration of `/etc/ansible/hosts`
-```yaml
+```bash
 [elk]
-10.1.0.100  ansible_python_interpreter=/usr/bin/python3
+<internal.ip>      ansible_python_interpreter=/usr/bin/python3
+<external.ip>      ansible_python_interpreter=/usr/bin/python3
 alpha.example.org  ansible_python_interpreter=/usr/bin/python3
-192.168.1.100  ansible_python_interpreter=/usr/bin/python3
 ```
 - Run the playbook, and navigate to `http://[your.VM.IP]:5601/app/kibana.` to check that the installation worked as expected.
-    `$ ansible-playbook /etc/ansible/roles/elk-stack-playbook.yml`
 
+    - `$ ansible-playbook /etc/ansible/roles/elk-stack-playbook.yml`
     - Check that the ELK Stack playbook is functioning by accessing kibana from
         a web browser.
 
-![ELK Webpage Screenshot](Images/elk_webpage_screenshot.png)
+![ELK Webpage Screenshot](Images/elk-webpage-screenshot.png)
 
 - **Optional:** To configure Filebeat on your web VMs run the following
     commands
@@ -133,8 +133,8 @@ password: "changeme"
 setup.kibana:
 host: "<vm.ip.addr>:5601"
 ```
-	- Then run the playbook
-  `$ ansible-playbook /etc/ansible/roles/filebeat-playbook.yml`
+
+  - Then run the playbook `$ ansible-playbook /etc/ansible/roles/filebeat-playbook.yml`
 
 
 - **Optional:** To configure Metricbeat on your web VMs run the following command
@@ -152,5 +152,4 @@ setup.kibana:
 host: "<vm.ip.addr>:5601"
 ```
 		
-  - Then run the playbook
-  `$ ansible-playbook /etc/ansible/roles/metricbeat-playbook.yml`
+  - Then run the playbook `$ ansible-playbook /etc/ansible/roles/metricbeat-playbook.yml`
