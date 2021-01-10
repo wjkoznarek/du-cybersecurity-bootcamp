@@ -42,7 +42,7 @@ The configuration details of each machine may be found below.
 The machines on the internal network are not exposed to the public Internet. 
 
 Only the Jump-Box-Provisioner machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- <home IP addr>
+- Home IP Address
 
 Machines within the network can only be accessed by Jump-Box-Provisioner.
 
@@ -50,8 +50,8 @@ A summary of the access policies in place can be found in the table below.
 
 | Name                 | Publicly Accessible | Allowed IP Addresses |
 |----------------------|---------------------|----------------------|
-| Jump-Box-Provisioner | Yes                 | <home IP addr>       |
-| elk-stack            | Yes                 | <home IP addr>       |
+| Jump-Box-Provisioner | Yes                 | My Home IP Addr      |
+| elk-stack            | Yes                 | My Home IP Addr      |
 | Web-1                | No                  | 10.0.0.4             |
 | Web-2                | No                  | 10.0.0.4             |
 | Web-3                | No                  | 10.0.0.4             |
