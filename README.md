@@ -101,7 +101,7 @@ SSH into the control node and follow the steps below:
         playbooks and configuration files.
     - `$ sudo docker cp Ansible/ansible/* <container.name>:/etc/ansible`
 
-- Update the `/etc/ansible/hosts` file to include the ELK stack VM IP address.
+- Update the `/etc/ansible/hosts` file to include the ELK stack elk.ip address.
 
     - Example configuration of `/etc/ansible/hosts`
 ```bash
@@ -110,7 +110,7 @@ SSH into the control node and follow the steps below:
 <external.ip>      ansible_python_interpreter=/usr/bin/python3
 alpha.example.org  ansible_python_interpreter=/usr/bin/python3
 ```
-- Run the playbook, and navigate to `http://[your.VM.IP]:5601/app/kibana.` to check that the installation worked as expected.
+- Run the playbook, and navigate to `http://[your.elk.ip]:5601/app/kibana.` to check that the installation worked as expected.
 
     - `$ ansible-playbook /etc/ansible/roles/elk-stack-playbook.yml`
     - Check that the ELK Stack playbook is functioning by accessing kibana from
@@ -125,13 +125,13 @@ alpha.example.org  ansible_python_interpreter=/usr/bin/python3
 
 ```yml
 output.elasticsearch:
-hosts: ["<vm.ip.addr>:9200"]
+hosts: ["<elk.ip.addr>:9200"]
 username: "elastic"
 password: "changeme"
 ```
 ```yml
 setup.kibana:
-host: "<vm.ip.addr>:5601"
+host: "<elk.ip.addr>:5601"
 ```
 
   - Then run the playbook 
@@ -144,13 +144,13 @@ host: "<vm.ip.addr>:5601"
 
 ```yml
 output.elasticsearch:
-hosts: ["<vm.ip.addr>:9200"]
+hosts: ["<elk.ip.addr>:9200"]
 username: "elastic"
 password: "changeme"
 ```
 ```yml
 setup.kibana:
-host: "<vm.ip.addr>:5601"
+host: "<elk.ip.addr>:5601"
 ```
 		
   - Then run the playbook 
