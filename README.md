@@ -99,7 +99,7 @@ SSH into the control node and follow the steps below:
 
 - **Optional:** Copy the whole directory for the Metricbeat and Filebeat
         playbooks and configuration files.
-    - `$ sudo docker cp Ansible/ansible/* <container.name>:/etc/ansible/`
+    - `$ sudo docker cp Ansible/ansible/* <container.name>:/etc/ansible`
 
 - Update the `/etc/ansible/hosts` file to include the ELK stack VM IP address.
 
