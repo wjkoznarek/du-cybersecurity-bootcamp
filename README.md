@@ -17,7 +17,7 @@ This document contains the following details:
 - ELK Configuration
   - Beats in Use
   - Machines Being Monitored
-- How to Use the Ansible Build
+- How to Use the Ansible Playbooks
 
 
 ### Description of the Topology
@@ -90,7 +90,7 @@ These Beats allow us to collect the following information from each machine:
 - Filebeat parses and forwards system logs from the Web VMs to the ELK Stack in an easy to read format.
 - Metricbeat reports system and service statistics about the Web VMs to the ELK stack VM.
 
-#### Using the ELK Stack Playbook
+### Using the ELK Stack Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
@@ -106,6 +106,8 @@ SSH into the control node and follow the steps below:
 - Attach to the ansible docker with `$ sudo docker attach <container.name>`
 
 - Update the [/etc/ansible/hosts](Ansible/hosts) file to include the ELK stack VM IP address.
+  - Append `ansible_python_interpreter=/usr/bin/python3` to ensure that the
+      correct version of python is used.
 
     - Example configuration of `/etc/ansible/hosts`
 ```bash
@@ -121,9 +123,9 @@ alpha.example.org  ansible_python_interpreter=/usr/bin/python3
 ![ELK Webpage Screenshot](Images/webpage-kibana.png)
 
 
-#### Using the Metricbeat and Filebeat
+### Using the Metricbeat and Filebeat Playbooks
 
-##### Filebeat 
+#### Filebeat 
 
 - Edit [/etc/ansible/files/filebeat-config.yml](Ansible/files/filebeat-config.yml) in the ansible container on the control node to include the ELK Stack IP address. You should also change the default login credentials.
 
@@ -142,7 +144,7 @@ host: "<elk.ip.addr>:5601"
   - `$ ansible-playbook /etc/ansible/roles/filebeat-playbook.yml`
 
 
-##### Metricbeat
+#### Metricbeat
 
 - Edit [/etc/ansible/files/metricbeat-config.yml](Ansible/files/metricbeat-config.yml) in the ansible on the control node to include the ELK Stack IP address. You should also change the default login credentials.
 
