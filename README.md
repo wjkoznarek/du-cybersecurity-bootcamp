@@ -2,13 +2,14 @@
 
 The files in this repository were used to configure the network depicted below.
 
-![Network Topology](Images/Network_Diagram.png)
+![Network Topology](Images/diagram.png)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the file may be used to install only certain pieces of it, such as Filebeat.
 
-  - [ELK Stack Playbook](Ansible/ansible/roles/elk-stack-playbook.yml)
-  - [Filebeat Playbook](Ansible/ansible/roles/filebeat-playbook.ym)
-  - [Metricbeat Playbook](Ansible/ansible/roles/metricbeat-playbook.ym)
+  - [DVWA Webserver Playbook](Ansible/roles/dvwa-playbook.yml)
+  - [ELK Stack Playbook](Ansible/roles/elk-stack-playbook.yml)
+  - [Filebeat Playbook](Ansible/roles/filebeat-playbook.ym)
+  - [Metricbeat Playbook](Ansible/roles/metricbeat-playbook.ym)
 
 This document contains the following details:
 - Description of the Topologu
@@ -56,6 +57,7 @@ A summary of the access policies in place can be found in the table below.
 | Web-2                | No                  | 10.0.0.4             |
 | Web-3                | No                  | 10.0.0.4             |
 
+
 ### Elk Configuration
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous 
@@ -72,9 +74,9 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running `docker ps -a` after successfully configuring the ELK instance.
 
-![Screenshot](Images/docker_ps_output.png)
+![Screenshot](Images/output-docker-ps.png)
 
-### Target Machines & Beats
+#### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
 - Web-1: 10.0.0.5
 - Web-2: 10.0.0.6
@@ -88,7 +90,7 @@ These Beats allow us to collect the following information from each machine:
 - Filebeat parses and forwards system logs from the Web VMs to the ELK Stack in an easy to read format.
 - Metricbeat reports system and service statistics about the Web VMs to the ELK stack VM.
 
-### Using the Playbook
+#### Using the ELK Stack Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
@@ -99,9 +101,11 @@ SSH into the control node and follow the steps below:
 
 - **Optional:** Copy the whole directory for the Metricbeat and Filebeat
         playbooks and configuration files.
-    - `$ sudo docker cp Ansible/ansible/* <container.name>:/etc/ansible`
+    - `$ sudo docker cp Ansible/* <container.name>:/etc/ansible`
 
-- Update the `/etc/ansible/hosts` file to include the ELK stack elk.ip address.
+- Attach to the ansible docker with `$ sudo docker attach <container.name>`
+
+- Update the [/etc/ansible/hosts](Ansible/hosts) file to include the ELK stack VM IP address.
 
     - Example configuration of `/etc/ansible/hosts`
 ```bash
@@ -116,12 +120,15 @@ alpha.example.org  ansible_python_interpreter=/usr/bin/python3
     - Check that the ELK Stack playbook is functioning by accessing kibana from
         a web browser.
 
-![ELK Webpage Screenshot](Images/elk-webpage-screenshot.png)
+![ELK Webpage Screenshot](Images/webpage-kibana.png)
 
-- **Optional:** To configure Filebeat on your web VMs run the following
+
+#### Using the Metricbeat and Filebeat
+- To configure Filebeat on your web VMs run the following
     commands
 
-  - Edit `/etc/ansible/files/filebeat-config.yml` to include the ELK Stack IP address.
+  - Edit [/etc/ansible/files/filebeat-config.yml](Ansible/files/filebeat-config.yml) in the control node to include 
+     the ELK Stack IP address. You should also change the default login credentials.
 
 ```yml
 output.elasticsearch:
@@ -138,9 +145,10 @@ host: "<elk.ip.addr>:5601"
     - `$ ansible-playbook /etc/ansible/roles/filebeat-playbook.yml`
 
 
-- **Optional:** To configure Metricbeat on your web VMs run the following command
+- To configure Metricbeat on your web VMs run the following command
 
-  - Edit `/etc/ansible/files/metricbeat-config.yml` to include the ELK Stack IP address.
+  - Edit [/etc/ansible/files/metricbeat-config.yml](Ansible/files/metricbeat-config.yml) in the control node to include 
+     the ELK Stack IP address. You should also change the default login credentials.
 
 ```yml
 output.elasticsearch:
