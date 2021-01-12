@@ -12,7 +12,7 @@ These files have been tested and used to generate a live ELK deployment on Azure
   - [Metricbeat Playbook](Ansible/roles/metricbeat-playbook.yml)
 
 This document contains the following details:
-- Description of the Topologu
+- Description of the Topology
 - Access Policies
 - ELK Configuration
   - Beats in Use
@@ -122,10 +122,10 @@ alpha.example.org  ansible_python_interpreter=/usr/bin/python3
 
 
 #### Using the Metricbeat and Filebeat
-- To configure Filebeat on your web VMs run the following
-    commands
 
-  - Edit [/etc/ansible/files/filebeat-config.yml](Ansible/files/filebeat-config.yml) in the ansible container on the control node to include the ELK Stack IP address. You should also change the default login credentials.
+##### Filebeat 
+
+- Edit [/etc/ansible/files/filebeat-config.yml](Ansible/files/filebeat-config.yml) in the ansible container on the control node to include the ELK Stack IP address. You should also change the default login credentials.
 
 ```yml
 output.elasticsearch:
@@ -138,13 +138,13 @@ setup.kibana:
 host: "<elk.ip.addr>:5601"
 ```
 
-  - Then run the playbook 
-    - `$ ansible-playbook /etc/ansible/roles/filebeat-playbook.yml`
+- Then run the playbook 
+  - `$ ansible-playbook /etc/ansible/roles/filebeat-playbook.yml`
 
 
-- To configure Metricbeat on your web VMs run the following command
+##### Metricbeat
 
-  - Edit [/etc/ansible/files/metricbeat-config.yml](Ansible/files/metricbeat-config.yml) in the ansible on the control node to include the ELK Stack IP address. You should also change the default login credentials.
+- Edit [/etc/ansible/files/metricbeat-config.yml](Ansible/files/metricbeat-config.yml) in the ansible on the control node to include the ELK Stack IP address. You should also change the default login credentials.
 
 ```yml
 output.elasticsearch:
@@ -157,5 +157,5 @@ setup.kibana:
 host: "<elk.ip.addr>:5601"
 ```
 		
-  - Then run the playbook 
-    - `$ ansible-playbook /etc/ansible/roles/metricbeat-playbook.yml`
+- Then run the playbook 
+  - `$ ansible-playbook /etc/ansible/roles/metricbeat-playbook.yml`
