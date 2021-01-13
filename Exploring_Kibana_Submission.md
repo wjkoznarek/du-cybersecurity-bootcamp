@@ -102,7 +102,7 @@
      - From what website did the visitor's traffic originate?
          - http://www.elastic-elastic-elastic.com/warning/alexander-poleshchuk
 
-![DiscoverScreenshot](screen10.png)
+![DiscoverScreenshot](Images/Kibana/screen10.png)
 
 6. Finish your investigation with a short overview of your insights. 
 
