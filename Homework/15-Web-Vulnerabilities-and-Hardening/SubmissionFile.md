@@ -191,7 +191,7 @@ Once the lab environment is running, open the HyperV manager and make sure that 
 
 On the bottom of the left side of the screen, click on `Challenge` and then choose `The Challenge`.
 
-*Note:** A common issue with this lab is the Challange activity failing to start successfully. Hit the `Restart the Lesson` button in the top right if you get an error starting the activity.
+**Note:** A common issue with this lab is the Challange activity failing to start successfully. Hit the `Restart the Lesson` button in the top right if you get an error starting the activity.
 
 ### The Challenge Instructions
 
@@ -207,7 +207,23 @@ Your first mission is to break the authentication scheme. There are a number of 
 
 Please include a screenshot here of the hidden JavaScript:
 
+  - URL manipulation to include `source?source=true` to see the server side
+    source code.
+  ![source=true](Images/screenshots/15-challenge1-view-source.png)
+
+  - Inspected the webpage code to find hidden elements
+  ![source=true](Images/screenshots/15-challenge1-hidden-fields.png)
+
+  - First I typed in garbage input and hit login to get a failed attempt.
+    TamperData returned a base64 value in the user value in the cookie header. 
+  - Converted the cookie from base64 value to text, this gave me the username.
+  ![source=true](Images/screenshots/15-challenge1-cookie-username.png)
+  
 After completing the first challenge, you will be provided with an option to continue to the next challenge.
+  - Successful login with the following credentials
+    - Username: `youaretheweakestlink`
+    - Password: `goodbye`
+  ![source=true](Images/screenshots/15-challenge1-complete.png)
 
 #### Challenge #2
 
@@ -221,10 +237,12 @@ Please include a screenshot here of all the credit card numbers from the databas
 
 ##### Notes
 - Take the Base64 value of the username cookie, and add our SQLi code `' OR
-  '1'='1`
+  '1'='1` and used TamperData to replace the cookie value with the SQLi.
+  ![source=true](Images/screenshots/15-challenge2-cookie-base64.png)
 
 After completing the second challenge, you will be provided with an option to continue to the next challenge.
 
+  ![source=true](Images/screenshots/15-challenge2-complete.png)
 
 #### Challenge #3
 
@@ -251,7 +269,7 @@ Your final act is to deface the website using command injection. Follow the walk
    - In the **URL Encoded** tab, find the **File** and **Value** form fields. 
    - This is where you will perform your command injection.
    
-    ![File Field](Images/webscarab_file_value_field.png)
+   ![File Field](Images/webscarab_file_value_field.png)
 
 - Next, perform a test and see if this shell is vulnerable to command injection. 
 
@@ -261,15 +279,15 @@ Your final act is to deface the website using command injection. Follow the walk
    
    - Click **Accept Changes**.
    
-     ![whoami](Images/whoami_pwd_image.png)
+   ![whoami](Images/whoami_pwd_image.png)
    
    - On the next window, click **Accept Changes** twice.
    
-     ![accept](Images/webscarab_2nd_window.png)
+   ![accept](Images/webscarab_2nd_window.png)
  
 - Scroll to the bottom of the **Current Network Status** window and observe the results for both of the `whoami` and `pwd` commands.
 
-    ![whoami & pwd](Images/whoami_pwd.png)
+   ![whoami & pwd](Images/whoami_pwd.png)
 
    - The results show that we are the root user and our current working directory is `/var/lib/tomcat6`.
 
@@ -292,13 +310,21 @@ Your final act is to deface the website using command injection. Follow the walk
 **Now it's your turn**   
 
 - Now that we know where the webpage is, your task will be to deface the website. Keep in mind the following:
-  * Use **WebScarab** to perform command injection.
-  * When performing command injection, you will need to select a field that WebScarab can return commands to. These fields are typically located in a drop down. 
-  * You will also need to locate and edit the the webpage's source code: `webgoat_challenge_guest.jsp`
-  * Your final command will:
-    * Change to the location of the `webgoat_challenge_guest.jsp` file.
-    * **and** echo `You've been hacked by...` followed by your name, to the `webgoat_challenge_guest.jsp` file.
+  - Use **WebScarab** to perform command injection.
+  - When performing command injection, you will need to select a field that WebScarab can return commands to. These fields are typically located in a drop down. 
+  - You will also need to locate and edit the the webpage's source code: `webgoat_challenge_guest.jsp`
+  - Your final command will:
+    - Change to the location of the `webgoat_challenge_guest.jsp` file.
+    - **and** echo `You've been hacked by...` followed by your name, to the `webgoat_challenge_guest.jsp` file.
+
+  - Used webscarab to edit the `file` field inserted `tcp && whoami && pwd`
+  ![pwd](15-challenge3-pwd.png)
+
+  - Used webscarab to edit the `file` field, inserted `tcp && cd / && find . -iname webgoat_challenge_guest.jsp`
+  ![find-jsp](15-challenge3-find-jsp.png)
     
+  - Used webscarab to edit the `file` field, inserted `tcp && cd webapps/WebGoat/ && echo "You have been hacked by Will Koznarek" > webgoat_challenge_guest.jsp
+  ![find-jsp](15-challenge3-complete.png)
 Please include a screenshot of the defaced website. 
 
 ---
