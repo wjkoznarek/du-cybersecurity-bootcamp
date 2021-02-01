@@ -231,20 +231,24 @@ Please include a screenshot here of the hidden JavaScript:
 
   - URL manipulation to include `source?source=true` to see the server side
     source code.
+
   ![source=true](Images/screenshots/15-challenge1-view-source.png)
 
   - Inspected the webpage code to find hidden elements
+
   ![source=true](Images/screenshots/15-challenge1-hidden-fields.png)
 
   - First I typed in garbage input and hit login to get a failed attempt.
     TamperData returned a base64 value in the user value in the cookie header. 
   - Converted the cookie from base64 value to text, this gave me the username.
+
   ![source=true](Images/screenshots/15-challenge1-cookie-username.png)
   
 After completing the first challenge, you will be provided with an option to continue to the next challenge.
   - Successful login with the following credentials
     - Username: `youaretheweakestlink`
     - Password: `goodbye`
+
   ![source=true](Images/screenshots/15-challenge1-complete.png)
 
 #### Challenge #2
@@ -260,6 +264,7 @@ Please include a screenshot here of all the credit card numbers from the databas
 ##### Notes
 - Take the Base64 value of the username cookie, and add our SQLi code `' OR
   '1'='1` and used TamperData to replace the cookie value with the SQLi.
+
   ![source=true](Images/screenshots/15-challenge2-cookie-base64.png)
 
 After completing the second challenge, you will be provided with an option to continue to the next challenge.
@@ -340,13 +345,13 @@ Your final act is to deface the website using command injection. Follow the walk
     - **and** echo `You've been hacked by...` followed by your name, to the `webgoat_challenge_guest.jsp` file.
 
   - Used webscarab to edit the `file` field inserted `tcp && whoami && pwd`
-  ![pwd](15-challenge3-pwd.png)
+  ![pwd](Images/screenshots/15-challenge3-pwd.png)
 
   - Used webscarab to edit the `file` field, inserted `tcp && cd / && find . -iname webgoat_challenge_guest.jsp`
-  ![find-jsp](15-challenge3-find-jsp.png)
+  ![find-jsp](Images/screenshots/15-challenge3-find-jsp.png)
     
   - Used webscarab to edit the `file` field, inserted `tcp && cd webapps/WebGoat/ && echo "You have been hacked by Will Koznarek" > webgoat_challenge_guest.jsp`
-  ![find-jsp](15-challenge3-complete.png)
+  ![find-jsp](Images/screenshots/15-challenge3-complete.png)
 
 Please include a screenshot of the defaced website. 
 
