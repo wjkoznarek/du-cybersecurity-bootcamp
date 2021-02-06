@@ -4,6 +4,7 @@
 
 
 - Using Google, can you identify who the Chief Executive Officer of Altoro Mutual is:
+
 ![altoro_mutual_ceo](images/screen_ceo.png)
 
 - How can this information be helpful to an attacker:
@@ -37,10 +38,12 @@ Enter the IP address for `demo.testfire.net` into Domain Dossier and answer the 
 
 - Install the Recon module `xssed`. 
 - Set the source to `demo.testfire.net`. 
+
 ![install_load](images/screen_xssed_install.png)
 
 
 - Run the module. 
+
 ![xssed_out](images/screen_xssed_out.png)
 
 
