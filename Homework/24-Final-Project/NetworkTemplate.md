@@ -11,7 +11,7 @@ You must inspect your traffic capture to answer the following questions:
     - `june11.dll`
 4. Upload the file to [VirusTotal.com](https://www.virustotal.com/gui/). 
 
-![june11.dll](screenshots/24-june11_virustotal.png)
+![june11.dll](./screenshots/24-june11_virustotal.png)
 
 5. What kind of malware is this classified as?
     - Trojan
