@@ -109,8 +109,8 @@ The Red Team was able to penetrate `Target 1` and retrieve the following confide
          - Initially this flag was found with `grep` once logged in via SSH as any user
          - `grep -ER flag /var/www/html/`  
 
-![flag1a](../screenshots/24-flag_1a.png)
-![flag1b](../screenshots/24-flag_1b.png)
+![flag1a](./screenshots/24-flag_1a.png)
+![flag1b](./screenshots/24-flag_1b.png)
 
   - `flag2.txt`: fc3fd58dcdad9ab23faca6e9a36e581c  
       - **Exploit Used**  
@@ -119,7 +119,7 @@ The Red Team was able to penetrate `Target 1` and retrieve the following confide
               a search
           - `find / -type f -iname "flag?.txt" -exec cat {} \; 2>/dev/null`  
 
-![flag2](../screenshots/24-flag_2.png)
+![flag2](./screenshots/24-flag_2.png)
 
   - `flag3.txt`: afc01ab56b50591e7dccf93122770cd2  
       - **Exploit Used**  
@@ -132,5 +132,5 @@ The Red Team was able to penetrate `Target 1` and retrieve the following confide
       - **Exploit Used**  
       - *Same method as flag 3, in the same database*  
 
-![priv_escalate](../screenshots/24-python_escalate.png)
-![flag3and4](../screenshots/24-flag_3_and_4.png)
+![priv_escalate](./screenshots/24-python_escalate.png)
+![flag3and4](./screenshots/24-flag_3_and_4.png)
