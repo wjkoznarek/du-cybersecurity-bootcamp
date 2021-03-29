@@ -17,7 +17,7 @@ The following machines were identified on the network:
   - **Public IP Address**: 104.42.157.16
 - ELK
   - **Operating System**: Ubuntu Linux
-  - **Purpose**: SIEM/ELK Stack
+  - **Purpose**: SIEM/IDS - ELK Stack
   - **IP Address**: 192.168.1.100
 - Target 1 
   - **Operating System**: Debian Linux 
@@ -54,7 +54,7 @@ Alert 1 is implemented as follows:
 Alert 2 is implemented as follows:
   - **Metric**: `http.request.bytes` 
   - **Threshold**: 3500 in the last 1 minute
-  - **Vulnerability Mitigated**: Since this will notify when the http request size is large enough, this can help alert when a DDOS attack is in progress
+  - **Vulnerability Mitigated**: Since this will notify when the http request size is large enough, this can help alert when a DDoS attack is in progress
   - **Reliability**: High reliability, very few false positives 
 
 #### Name of Alert 3
@@ -62,7 +62,7 @@ Alert 3 is implemented as follows:
   - **Metric**: `system.process.cpu.total.pct`
   - **Threshold**: 0.5 in last 5 minutes
   - **Vulnerability Mitigated**: This will trigger an alert when CPU usage rises above 50%.
-  - **Reliability**: Low reliablity, since CPU usage is not indicitave of an attack, it can trigger when any resource intensive process is running. 
+  - **Reliability**: Low reliability, since CPU usage is not indicative of an attack, it can trigger when any resource intensive process is running. 
 
 
 ### Suggestions for Going Further (Optional)
@@ -76,7 +76,7 @@ The logs and alerts generated during the assessment suggest that this network is
   
 - Vulnerability 2 - HTTP Request Size Monitor
   - **Patch**: The IT team could implement an intrusion prevention system or intrusion detection system on the network.
-  - **Why It Works**: Since DDoS attacks are extremely complex and diverse, it is difficult to implement only one tool to automatically respond to such an attack. With proper baselining, it will be possible for the IPS or IDS to alert or notify based on the fact that they perform deep packet analysis to see if the traffic is legitemate or not. 
+  - **Why It Works**: Since DDoS attacks are extremely complex and diverse, it is difficult to implement only one tool to automatically respond to such an attack. With proper baselining, it will be possible for the IPS or IDS to alert or notify based on the fact that they perform deep packet analysis to see if the traffic is legitimate or not. 
 
 - Vulnerability 3 - CPU Usage Monitor
   - **Patch**: Implement a host-based intrusion prevention system, a common feature on modern anti-virus programs
