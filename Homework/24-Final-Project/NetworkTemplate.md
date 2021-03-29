@@ -10,6 +10,9 @@ You must inspect your traffic capture to answer the following questions:
 3. What is the name of the malware downloaded to the 10.6.12.203 machine?
     - `june11.dll`
 4. Upload the file to [VirusTotal.com](https://www.virustotal.com/gui/). 
+
+![june11.dll](screenshots/24-june11_virustotal.png)
+
 5. What kind of malware is this classified as?
     - Trojan
 

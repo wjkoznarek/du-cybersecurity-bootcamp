@@ -80,4 +80,4 @@ The logs and alerts generated during the assessment suggest that this network is
 
 - Vulnerability 3 - CPU Usage Monitor
   - **Patch**: Implement a host-based intrusion prevention system, a common feature on modern anti-virus programs
-  - **Why It Works**: Similar to a network-based IPS, these will perform deep packet analysis to prevent malware from installing or running on the client's computer. 
+  - **Why It Works**: Similar to a network-based IPS, these will perform deep packet analysis to prevent malware from installing or running on the client's computer, which may steal computer resources causing the CPU usage to spike. 

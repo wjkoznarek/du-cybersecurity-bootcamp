@@ -106,31 +106,31 @@ The Red Team was able to penetrate `Target 1` and retrieve the following confide
       - **Exploit Used**  
          - Sensitive data publicly available  
          - Used the web browser's console to view source code   
-         - Initially this flag was found with `grep` once logged in as any user
+         - Initially this flag was found with `grep` once logged in via SSH as any user
          - `grep -ER flag /var/www/html/`  
 
-![flag1a](screenshots/24-flag_1a.png)
-![flag1b](screenshots/24-flag_1b.png)
+![flag1a](../screenshots/24-flag_1a.png)
+![flag1b](../screenshots/24-flag_1b.png)
 
   - `flag2.txt`: fc3fd58dcdad9ab23faca6e9a36e581c  
       - **Exploit Used**  
           - Weak SSH authentication  
-          - Once I was able to connect via SSH as any user I was able to find this flag  
+          - Once connected via SSH as any user, the flag could be found with
+              a search
           - `find / -type f -iname "flag?.txt" -exec cat {} \; 2>/dev/null`  
 
-![flag2](screenshots/24-flag_2.png)
+![flag2](../screenshots/24-flag_2.png)
 
   - `flag3.txt`: afc01ab56b50591e7dccf93122770cd2  
       - **Exploit Used**  
           - Misconfiguration of `steven` user to run `python` with root permissions  
   	     	- `sudo python -c 'import os; os.system("/bin/sh")'`  
-              - Once the permissions were escalated, I was able to read the `wp-config.php` file which includes the SQL database login information in clear text.   
-              - Then, with the login information for the database was entered I was able to query the database for flags 3 and 4  
+              - Once the permissions were escalated, `wp-config.php` file was readable, file includes the SQL database login information in clear text.   
+              - With the login information for the database, it could be queried for flags 3 and 4  
 
   - `flag4.txt`: 715dea6c055b9fe3337544932f2941ce  
       - **Exploit Used**  
-      - *See above flag for information.*  
+      - *Same method as flag 3, in the same database*  
 
-![priv_escalate](screenshots/24-python_escalate.png)
-![wp-config](screenshots/24-wp-config_1.png)
-![flag3and4](screenshots/24-flag_3_and_4.png)
+![priv_escalate](../screenshots/24-python_escalate.png)
+![flag3and4](../screenshots/24-flag_3_and_4.png)
